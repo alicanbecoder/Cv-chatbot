@@ -1,246 +1,188 @@
-🤖 Yapay Zekâ Destekli CV Chatbot Projesi
+# 🤖 AI Destekli CV Chatbot Projesi | Alican Tunç
 
-Bu repository, klasik PDF tabanlı CV anlayışını bir üst seviyeye taşıyarak,
-konuşabilen, sorgulanabilen ve etkileşimli bir yapay zekâ sistemine dönüştürmek amacıyla geliştirilmiş iki ayrı chatbot projesini içermektedir.
+Bu proje, klasik PDF formatındaki CV anlayışını modern yapay zekâ mimarisiyle yeniden ele alarak,  
+**konuşabilen, sorgulanabilen ve etkileşimli bir kariyer profili** oluşturmayı hedeflemektedir.
 
-Artık sabit bir CV okunmak yerine, kullanıcılar şu tarz sorular sorabilmektedir:
+Artık CV sadece okunmaz;  
+sorgulanır, analiz edilir ve özetlenir.
 
-"Alican nerede çalıştı?"
+Örnek sorular:
 
-"Hangi projeleri yaptı?"
+- "Alican nerede çalıştı?"
+- "Hangi teknolojilerde deneyimli?"
+- "Yaptığı projeleri özetler misin?"
+- "Kariyerinin güçlü yönleri neler?"
 
-"Teknik olarak hangi alanlarda güçlü?"
+Yapay zekâ bu sorulara doğrudan cevap verir.
+## 🎯 Projenin Amacı
 
-"Birkaç cümleyle kariyerini özetle"
+Bu çalışmanın temel amacı:
 
-ve yapay zekâ doğrudan cevap üretmektedir.
+> Statik bir özgeçmiş yerine  
+> dinamik ve yaşayan bir yapay zekâ profili oluşturmak.
 
-🎯 Projenin Amacı
+Bu repository’de iki farklı chatbot mimarisi birlikte geliştirilmiştir:
 
-Bu projenin temel fikri şudur:
+1. 🧠 RAG Tabanlı Üretim Sistemi (Streamlit)
+2. ⚡ Prompt Tabanlı Demo Sistemi (Chainlit)
+Bu iki yapının birlikte sunulması, mimari farkları göstermek ve gerçek dünya AI sistemlerini karşılaştırmalı olarak sunmak içindir.
 
-PDF olarak saklanan statik CV yerine
-kendi kendini anlatabilen dinamik bir yapay zekâ profili oluşturmak.
-
-Bu repository, bunu iki farklı teknik yaklaşımla göstermektedir:
-
-RAG tabanlı üretim seviyesi mimari (gerçek sistem)
-
-Prompt tabanlı demo mimarisi (hızlı vitrin chatbotu)
-
-İki yapı da bilerek aynı projede tutulmuştur.
-Amaç, bir mühendislik karşılaştırması sunmak ve farklı tasarım yaklaşımlarını gösterebilmektir.
-
-📂 Proje Yapısı
+## 📂 Proje Yapısı
 cv-chatbot/
 │
-├── rag_chatbot/          # Gerçek sistem (RAG mimarisi)
-│   ├── app.py
-│   ├── requirements.txt
-│   └── README.md
-│
-├── chainlit_chatbot/     # Demo sistem (Prompt tabanlı)
-│   ├── app.py
-│   ├── requirements.txt
-│   └── README.md
-│
+├── rag_chatbot/ # RAG tabanlı gerçek sistem
+├── chainlit_chatbot/ # Prompt tabanlı demo chatbot
 ├── .gitignore
-└── README.md
 
-🔹 Proje 1: RAG Tabanlı CV Chatbot (Streamlit)
-📁 Klasör: /rag_chatbot
 
-Bu sistem Retrieval-Augmented Generation (RAG) mimarisi kullanır.
+---
 
-✅ Nasıl Çalışır?
-CV PDF → Parçalara Bölme → Embedding Model
-       → Vektör Veritabanı (Chroma)
-       → Anlamsal Arama → Gemini AI
-       → Gerçek cevap
+# 🧠 Sistem 1: RAG Tabanlı CV Chatbot (Streamlit)
 
-✅ Teknik Özellikler
+Bu sistem, **Retrieval-Augmented Generation** (RAG) yaklaşımıyla çalışır.
 
-CV embedding olarak vektör veritabanına işlenir
+## ✅ Nasıl Çalışır?
 
-Anlamsal arama yapılır
+CV PDF
+↓
+Metni Parçalama
+↓
+Embedding Model
+↓
+Vektör Veritabanı (ChromaDB)
+↓
+Anlamsal Arama
+↓
+Gemini AI
+↓
+Doğrulanmış Cevap
 
-Yalnızca ilgili dokümanlar modele gönderilir
 
-Halüsinasyon (uydurma cevap) riski minimize edilir
+## ✅ Avantajları
 
-Büyük veri setleri için ölçeklenebilir yapı
+- CV içeriğine birebir dayanır
+- Doğruluk oranı yüksektir
+- Halüsinasyon riski düşüktür
+- Ölçeklenebilir mimariye sahiptir
+- Profesyonel kullanım için uygundur
 
-✅ Kullanılan Teknolojiler
+---
 
-Google Gemini API
+# ⚡ Sistem 2: Prompt Tabanlı CV Chatbot (Chainlit)
 
-ChromaDB (vektör veritabanı)
+Bu sistem CV’yi doğrudan prompt içine gömerek çalışır.
 
-SentenceTransformers (embedding)
+## ✅ Amaç
 
-Streamlit (arayüz)
+- Hızlı demo oluşturmak
+- Etkileşimli chatbot deneyimi sunmak
+- LinkedIn ve portföy sunumları için vitrin proje üretmek
 
-Python
+## ⚠ Kısıtlar
 
-▶ Çalıştırma
+- Halüsinasyon riski vardır
+- Büyük veri için uygun değildir
+- Üretim ortamı için tavsiye edilmez
+
+---
+
+## ⚖ Karşılaştırma
+
+| Özellik | RAG Sistemi | Prompt Demo |
+|----------|-------------|-------------|
+| Doğruluk | ✅ Yüksek | ⚠ Orta |
+| Ölçeklenebilirlik | ✅ Var | ❌ Yok |
+| Halüsinasyon Riski | ✅ Düşük | ⚠ Yüksek |
+| Kullanım Alanı | Üretim | Demo |
+| Mimari | Profesyonel | Deneysel |
+
+---
+
+# 🧑‍💻 Kullanılan Teknolojiler
+
+- Python
+- Google Gemini API
+- ChromaDB
+- Sentence Transformers
+- Streamlit
+- Chainlit
+
+Gemini, **ücretsiz API kotası sunduğu için** tercih edilmiştir.
+
+---
+
+# ▶️ Projeyi Çalıştırma
+
+## RAG Chatbots (Streamlit)
+
+```bash
 cd rag_chatbot
 pip install -r requirements.txt
 streamlit run app.py
 
-
-Tarayıcıda açılır:
-
 http://localhost:8501
 
-🔹 Proje 2: Prompt Tabanlı CV Chatbot (Chainlit)
-📁 Klasör: /chainlit_chatbot
+## Prompt Chatbot (Chainlit)
 
-Bu versiyonda CV doğrudan sistem mesajına gömülmüştür.
-
-✅ Amaç
-
-Bu proje:
-
-Hızlı demo üretmek
-
-Arayüz denemek
-
-Etkileşim gösterimi yapmak
-
-LinkedIn / Medium vitrin demosu oluşturmak
-
-için tasarlanmıştır.
-
-✅ Avantajlar
-
-Hızlı cevap
-
-Basit mimari
-
-Etkileyici sohbet arayüzü
-
-Düşük geliştirici yükü
-
-⚠ Kısıtları
-
-Vektör arama yoktur
-
-CV büyürse yapı bozulur
-
-Halüsinasyon riski vardır
-
-Ölçeklenebilirlik sınırıdır
-
-▶ Çalıştırma
 cd chainlit_chatbot
 pip install -r requirements.txt
 chainlit run app.py
 
-⚖ RAG vs Prompt Karşılaştırması
-Özellik	RAG Sistem	Prompt Demo
-Doğruluk	✅ Yüksek	⚠ Orta
-Ölçeklenebilirlik	✅ Var	❌ Yok
-Halüsinasyon Riski	✅ Düşük	⚠ Orta
-Performans	⚠ Orta	✅ Hızlı
-Mimari seviye	✅ Üretim	⚠ Demo
-🔐 API Anahtarı (Gemini)
-
-Bu projede OpenAI yerine Google Gemini tercih edilmiştir.
-
-Neden Gemini?
-
-✅ Ücretsiz API kotası
-✅ Deneme ve prototipleme için ideal
-✅ Yeni geliştiriciler için erişilebilir
-✅ Performans açısından yeterli
-
-Ortam Değişkeni Tanımlama
+🔐 API Anahtarı Ayarlama
 Windows
-set GEMINI_API_KEY=ANAHTARINIZ
+set GEMINI_API_KEY=YOUR_KEY
 
 Linux / Mac
-export GEMINI_API_KEY=ANAHTARINIZ
+export GEMINI_API_KEY=YOUR_KEY
 
-🚀 Gelecek Hedefler
+🚀 Gelecek Planları
 
-Bu proje bir "demo" değil, bir altyapı çalışmasıdır.
+Bu proje tek bir demo değildir, uzun vadeli bir AI altyapı çalışmasıdır.
 
-Planlanan geliştirmeler:
+📌 1. CV Yerine Kapsamlı Bilgi Havuzu
 
-1️⃣ CV Yerine Kapsamlı Bilgi Havuzu
+Sadece CV değil:
 
-CV tek başına yeterli değil.
-Sonraki sürümlerde:
+-Blog yazıları
 
-Medium yazıları
+-GitHub projeleri
 
-GitHub projeleri
+-Sertifikalar
 
-Sertifikalar
+-Akademik dokümanlar
 
-Proje dokümantasyonu
+tek bir vektör havuzunda toplanacaktır.
 
-Akademik çalışmalar
+📌 2. Local Model Entegrasyonu
 
-tek sistemde birleştirilecek.
+API kullanımına bağlı kalmamak için:
 
-Amaç:
+-Ollama,LM Studio,Açık kaynak LLM’ler ve Fine-tuning çalışmaları planlanmaktadır.
 
-Kişisel "career intelligence" oluşturmak.
+📌 3. Hibrit Mimari
 
-2️⃣ Local Model Sistemine Geçiş (Ücret Bağımlılığı Problemine Çözüm)
+-Local Model (öncelikli)
+-Cloud API (yedek)
+-Vector Database
 
-Bulut API sistemlerinin sorunları:
+📌 4. Arayüz Geliştirmeleri
 
-❌ Uzun vadede maliyet
-❌ Kota sınırlamaları
-❌ Gizlilik riskleri
+-Dil seçimi
 
-Bu nedenle:
+-Tema iyileştirmesi
 
-✅ Local modeller denenecek
-✅ Ollama / LM Studio
-✅ GGUF modeller
-✅ Offline chatbot deneyleri
-✅ Fine-tuning çalışmaları
+-Proje gezgini
 
-3️⃣ Hibrit Mimari
-Local Model (varsayılan)
-Cloud Model (fallback)
-Vector Database (kalıcı bellek)
+-Kariyer zaman çizelgesi
 
-4️⃣ Arayüz Geliştirmeleri
-
-Dil seçimi
-
-Tema güncelleme
-
-Örnek sorular
-
-Kariyer zaman çizelgesi
-
-Proje keşif modu
-
-Rapor üretimi
-
-🧠 Bu Proje Neyi Gösteriyor?
-
-Bu repo şunu ispatlıyor:
-
-✅ Yapay zekâ entegrasyonu
-✅ RAG mimarisi
-✅ Prompt mühendisliği
-✅ Debug tecrübesi
-✅ API yönetimi
-✅ Sistem tasarımı
-✅ Ürün düşünme becerisi
+-PDF çıktı alma
 
 👤 Geliştirici
 
 Alican Tunç
-Yüksek Lisans Öğrencisi – Veri Bilimi & Büyük Veri
-AI | ML | Data Science | Sistem Tasarımı
+Yüksek Lisans – Veri Bilimi & Büyük Veri
+AI | ML | Data Science
 
 ✅ Not
-
 Bu proje eğitim ve portföy amaçlı paylaşılmaktadır.
+
