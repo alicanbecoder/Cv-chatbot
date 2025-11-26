@@ -1,57 +1,188 @@
-# 🍰 RAG (Retrieval Augmented Generation) Chatbot Projesi: Tarif Defteri Asistanı
+# 🤖 AI Destekli CV Chatbot Projesi | Alican Tunç
 
-Bu proje, Akbank GenAI Bootcamp kapsamında geliştirilmiş RAG temelli bir uygulamadır. Amacı, sağlanan el yazması tarif defterine dayanarak kullanıcı sorularına hızlı, bağlamsal ve doğru cevaplar vermektir.
+Bu proje, klasik PDF formatındaki CV anlayışını modern yapay zekâ mimarisiyle yeniden ele alarak,  
+**konuşabilen, sorgulanabilen ve etkileşimli bir kariyer profili** oluşturmayı hedeflemektedir.
+
+Artık CV sadece okunmaz;  
+sorgulanır, analiz edilir ve özetlenir.
+
+Örnek sorular:
+
+- "Alican nerede çalıştı?"
+- "Hangi teknolojilerde deneyimli?"
+- "Yaptığı projeleri özetler misin?"
+- "Kariyerinin güçlü yönleri neler?"
+
+Yapay zekâ bu sorulara doğrudan cevap verir.
+## 🎯 Projenin Amacı
+
+Bu çalışmanın temel amacı:
+
+> Statik bir özgeçmiş yerine  
+> dinamik ve yaşayan bir yapay zekâ profili oluşturmak.
+
+Bu repository’de iki farklı chatbot mimarisi birlikte geliştirilmiştir:
+
+1. 🧠 RAG Tabanlı Üretim Sistemi (Streamlit)
+2. ⚡ Prompt Tabanlı Demo Sistemi (Chainlit)
+Bu iki yapının birlikte sunulması, mimari farkları göstermek ve gerçek dünya AI sistemlerini karşılaştırmalı olarak sunmak içindir.
+
+## 📂 Proje Yapısı
+cv-chatbot/
+│
+├── rag_chatbot/ # RAG tabanlı gerçek sistem
+├── chainlit_chatbot/ # Prompt tabanlı demo chatbot
+├── .gitignore
+
 
 ---
 
-## 🎯 1. PROJENİN AMACI VE ELDE EDİLEN SONUÇLAR
+# 🧠 Sistem 1: RAG Tabanlı CV Chatbot (Streamlit)
 
-Bu chatbot, el yazması PDF formatındaki tarif defterinde yer alan bilgilere dayanarak, kullanıcıların tariflerle ilgili spesifik sorgularını yanıtlamayı amaçlar. Model, genel bilgi vermek yerine, **yalnızca defterdeki bilgiyle** cevap üretir.
+Bu sistem, **Retrieval-Augmented Generation** (RAG) yaklaşımıyla çalışır.
 
-**Elde Edilen Sonuç:** Sistem, karşılaşılan tüm teknik zorluklara rağmen, modern LCEL mimarisi ile kurulmuş ve Lor Tatlısı gibi spesifik sorgulara dahi **doğru ve bağlamsal** cevap verebilir durumdadır.
+## ✅ Nasıl Çalışır?
 
-## 💾 2. VERİ SETİ HAKKINDA BİLGİ
+CV PDF
+↓
+Metni Parçalama
+↓
+Embedding Model
+↓
+Vektör Veritabanı (ChromaDB)
+↓
+Anlamsal Arama
+↓
+Gemini AI
+↓
+Doğrulanmış Cevap
 
-* **Veri Kaynağı:** `recipe book.pdf` dosyası.
-* **İçerik:** Vişneli Gül Tatlısı, Lor Tatlısı, Baklava ve çeşitli Kurabiye/Kekler dahil olmak üzere **30'dan fazla tatlı ve tuzlu tarifin** malzeme listesi ve hazırlanış adımları.
-* **Veri Tipi:** Metin tabanlı (PDF).
 
-## ⚙️ 3. ÇÖZÜM MİMARİSİ (RAG PİPELİNE)
+## ✅ Avantajları
 
-Proje, LangChain'in modern **LCEL (LangChain Expression Language)** yöntemi kullanılarak oluşturulan bir RAG zincirine dayanmaktadır.
+- CV içeriğine birebir dayanır
+- Doğruluk oranı yüksektir
+- Halüsinasyon riski düşüktür
+- Ölçeklenebilir mimariye sahiptir
+- Profesyonel kullanım için uygundur
 
-| Bileşen | Seçim | Rolü ve Açıklaması |
-| :--- | :--- | :--- |
-| **RAG Çerçevesi** | LCEL (LangChain Expression Language) | Kompleks RAG zincirini hatasız ve stabil bir şekilde çalıştırmıştır. |
-| **Büyük Dil Modeli (LLM)** | Gemini 2.5 Flash API | Cevap üretir (Generation). |
-| **Embedding Modeli** | HuggingFace `all-MiniLM-L6-v2` | Metinleri vektörlere çevirmiştir. (Gemini **kota aşımlarını** atlamak için açık kaynaklı modele geçilmiştir.) |
-| **Vektör Veritabanı (Vector DB)** | ChromaDB | Vektörleri depolar ve sorguya en yakın **tarif parçalarını** çeker (Retrieval). |
+---
 
-## 🛠️ 4. KODUN ÇALIŞMA KILAVUZU
+# ⚡ Sistem 2: Prompt Tabanlı CV Chatbot (Chainlit)
 
-Bu proje Google Colab ortamında geliştirilmiştir.
+Bu sistem CV’yi doğrudan prompt içine gömerek çalışır.
 
-1.  **Dosya Hazırlığı:** `app.py`, `requirements.txt` ve `recipe book.pdf` dosyaları GitHub'dan indirilerek Colab ortamına yüklenmelidir.
-2.  **API Anahtarları:** Colab **Secrets** üzerinden **`GEMINI_API_KEY`** anahtarları eklenmelidir.
-3.  **Kurulum:** Colab hücresinde `!pip install -r requirements.txt` komutu çalıştırılmalıdır.
-4.  **RAG Kurulumu:** Colab notebook'undaki tüm RAG kurulum (Embedding ve Zincir) kodları çalıştırılmalıdır.
-5.  **Arayüzü Başlatma:** Streamlit aşağıdaki komutlar ile Ngrok üzerinden tünellenerek canlıya alınır:
-    ```bash
-    !ngrok authtoken [NGROK ANAHTARINIZ]
-    !streamlit run app.py & npx kill-port 8501
-    from pyngrok import ngrok
-    public_url = ngrok.connect(8501)
-    ```
+## ✅ Amaç
 
-## 🌐 5. WEB ARAYÜZÜ & PRODUCT KILAVUZU (CANLI DEPLOY)
+- Hızlı demo oluşturmak
+- Etkileşimli chatbot deneyimi sunmak
+- LinkedIn ve portföy sunumları için vitrin proje üretmek
 
-Proje, **Streamlit** kullanılarak web arayüzü üzerinden sunulmaktadır.
+## ⚠ Kısıtlar
 
-**CANLI DEPLOY LİNKİ:** https://rag-recipebook-chatbot.streamlit.app/
-**Test Senaryosu:**
+- Halüsinasyon riski vardır
+- Büyük veri için uygun değildir
+- Üretim ortamı için tavsiye edilmez
 
-Kullanıcı, yukarıdaki linke giderek, tarif defterinden bir soru sorar. Örneğin: **"Lor Tatlısı'nın şerbeti için kaç bardak su ve şeker gereklidir?"**
-* **Beklenen Cevap:** Sistem, PDF'i tarar ve Lor Tatlısı'na ait bilgiyi çekerek cevap verir.
+---
 
-NOTLAR:
-Blocklanma için streamlit cloudda deploy edilen repoda çok değişiklik yapılması hata vermesine neden olabiliyormuş. "Your account has  exceeded fair-use limits and was blocked by the system." bu uyarıyla streamlit hesabıma da tekrar giremediğim için yeni deploy da oluşturamadım. Mentorum yaşadığım durumu READ.ME dosyama eklememi söyledi.
+## ⚖ Karşılaştırma
+
+| Özellik | RAG Sistemi | Prompt Demo |
+|----------|-------------|-------------|
+| Doğruluk | ✅ Yüksek | ⚠ Orta |
+| Ölçeklenebilirlik | ✅ Var | ❌ Yok |
+| Halüsinasyon Riski | ✅ Düşük | ⚠ Yüksek |
+| Kullanım Alanı | Üretim | Demo |
+| Mimari | Profesyonel | Deneysel |
+
+---
+
+# 🧑‍💻 Kullanılan Teknolojiler
+
+- Python
+- Google Gemini API
+- ChromaDB
+- Sentence Transformers
+- Streamlit
+- Chainlit
+
+Gemini, **ücretsiz API kotası sunduğu için** tercih edilmiştir.
+
+---
+
+# ▶️ Projeyi Çalıştırma
+
+## RAG Chatbots (Streamlit)
+
+```bash
+cd rag_chatbot
+pip install -r requirements.txt
+streamlit run app.py
+
+http://localhost:8501
+
+## Prompt Chatbot (Chainlit)
+
+cd chainlit_chatbot
+pip install -r requirements.txt
+chainlit run app.py
+
+🔐 API Anahtarı Ayarlama
+Windows
+set GEMINI_API_KEY=YOUR_KEY
+
+Linux / Mac
+export GEMINI_API_KEY=YOUR_KEY
+
+🚀 Gelecek Planları
+
+Bu proje tek bir demo değildir, uzun vadeli bir AI altyapı çalışmasıdır.
+
+📌 1. CV Yerine Kapsamlı Bilgi Havuzu
+
+Sadece CV değil:
+
+-Blog yazıları
+
+-GitHub projeleri
+
+-Sertifikalar
+
+-Akademik dokümanlar
+
+tek bir vektör havuzunda toplanacaktır.
+
+📌 2. Local Model Entegrasyonu
+
+API kullanımına bağlı kalmamak için:
+
+-Ollama,LM Studio,Açık kaynak LLM’ler ve Fine-tuning çalışmaları planlanmaktadır.
+
+📌 3. Hibrit Mimari
+
+-Local Model (öncelikli)
+-Cloud API (yedek)
+-Vector Database
+
+📌 4. Arayüz Geliştirmeleri
+
+-Dil seçimi
+
+-Tema iyileştirmesi
+
+-Proje gezgini
+
+-Kariyer zaman çizelgesi
+
+-PDF çıktı alma
+
+👤 Geliştirici
+
+Alican Tunç
+Yüksek Lisans – Veri Bilimi & Büyük Veri
+AI | ML | Data Science
+
+✅ Not
+Bu proje eğitim ve portföy amaçlı paylaşılmaktadır.
+
